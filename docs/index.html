@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Detector de Plágio - Jaccard</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <div class="container-ferramenta">
+
+        <h1 class="main-title">
+            <span style="font-size: 0.9em;">🔍</span> Detector de Plágio
+        </h1>
+        <p class="main-subtitle">Compare dois documentos e identifique a similaridade usando o Índice de Jaccard.</p>
+
+        <div class="info-box">
+            <h3>Sobre o Índice de Jaccard</h3>
+            <p>É uma medida estatística de similaridade entre conjuntos. Calculamos a razão entre a intersecção
+                (palavras em comum) e a união (todas as palavras únicas) dos dois documentos.</p>
+            <p>Esta ferramenta é indicativa. Para análises profissionais de plágio, considere ferramentas
+                especializadas.</p>
+
+            <h3 style="margin-top: 20px;">Possíveis Limitações</h3>
+            <ul>
+                <li><strong>Não considera a ordem:</strong> "O gato persegue o rato" e "O rato persegue o gato" teriam
+                    100% de similaridade.</li>
+                <li><strong>Não entende semântica:</strong> "Carro" e "Automóvel" são tratados como palavras 100%
+                    diferentes.</li>
+                <li><strong>Não detecta paráfrase:</strong> Se o texto for reescrito com outras palavras, o índice de
+                    Jaccard será baixo.</li>
+                <li><strong>Sensível a palavras comuns:</strong> Palavras como "o", "a", "de", "que" (stop words) podem
+                    inflar artificialmente a similaridade se não forem removidas.</li>
+            </ul>
+        </div>
+
+        <div class="document-box">
+            <h4>Documento 1</h4>
+            <nav class="input-tab-nav" data-target-box="doc1-content">
+                <button class="input-tab-button active" data-tab="doc1-text">Colar Texto</button>
+                <button class="input-tab-button" data-tab="doc1-upload">Upload Arquivo</button>
+            </nav>
+
+            <div id="doc1-text" class="input-tab-content active" data-parent-box="doc1-content">
+                <textarea id="docA" rows="6" placeholder="Cole o conteúdo do primeiro documento aqui..."></textarea>
+            </div>
+
+            <div id="doc1-upload" class="input-tab-content" data-parent-box="doc1-content">
+                <input type="file" id="fileA" accept=".txt" style="display: none;">
+                <label for="fileA" class="upload-placeholder">
+                    <span>Clique para selecionar um arquivo .txt</span>
+                </label>
+                <span id="fileA-name" class="file-name-display">Nenhum arquivo selecionado.</span>
+            </div>
+
+        </div>
+
+        <div class="document-box">
+
+            <h4>Documento 2</h4>
+            <nav class="input-tab-nav" data-target-box="doc2-content">
+                <button class="input-tab-button active" data-tab="doc2-text">Colar Texto</button>
+                <button class="input-tab-button" data-tab="doc2-upload">Upload Arquivo</button>
+            </nav>
+
+            <div id="doc2-text" class="input-tab-content active" data-parent-box="doc2-content">
+                <textarea id="docB" rows="6" placeholder="Cole o conteúdo do segundo documento aqui..."></textarea>
+            </div>
+
+            <div id="doc2-upload" class="input-tab-content" data-parent-box="doc2-content">
+                <input type="file" id="fileB" accept=".txt" style="display: none;">
+                <label for="fileB" class="upload-placeholder">
+                    <span>Clique para selecionar um arquivo .txt</span>
+                </label>
+                <span id="fileB-name" class="file-name-display">Nenhum arquivo selecionado.</span>
+            </div>
+        </div>
+
+        <div class="options-box">
+            <div class="option-item">
+                <input type="checkbox" id="checkStopwords" name="checkStopwords">
+                <label for="checkStopwords">Remover palavras comuns (Stopwords)</label>
+            </div>
+            
+            <div class="option-item">
+                <input type="checkbox" id="checkStemming" name="checkStemming">
+                <label for="checkStemming">Reduzir palavras à raiz (Stemming)</label>
+            </div>
+            
+            <div class="option-item">
+                <input type="checkbox" id="checkBigrams" name="checkBigrams">
+                <label for="checkBigrams">Analisar em pares de palavras (Bigrams)</label>
+            </div>
+        </div>
+        <div class="button-group">
+            <button id="btnAnalisar">Analisar Documentos</button>
+            <button id="btnClear" type="button">Limpar</button>
+        </div>
+        <div id="result-display" style="display: none;">
+            <h2 class="result-title">Resultado</h2>
+            <div class="metric-container">
+                <div class="metric-box">
+                    <span class="metric-label">SIMILARIDADE (J)</span>
+                    <div id="jaccard-similarity" class="metric-value">0.00%</div>
+                </div>
+                <div class="metric-divider"></div>
+                <div class="metric-box">
+                    <span class="metric-label">DISTÂNCIA (1 - J)</span>
+                    <div id="jaccard-distance" class="metric-value">0.00%</div>
+                </div>
+            </div>
+            <div id="status-message">Aguardando entrada...</div>
+
+            <hr class="separator">
+
+            <h4>Detalhamento do Cálculo</h4>
+            <p id="intersection-count">Intersecção |A ∩ B|: 0</p>
+            <p id="union-count">União |A ∪ B|: 0</p>
+            <p id="jaccard-formula">Fórmula (J): |A ∩ B| / |A ∪ B| = 0 / 0</p>
+        </div>
+
+    </div>
+
+    <script src="./app.js" type="module"></script>
+</body>
+
+</html>
