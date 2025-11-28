@@ -10,7 +10,7 @@ A aplicação foi desenvolvida para a disciplina de Matemática para Computaçã
 
 Acesse a ferramenta funcional diretamente no seu navegador através do link abaixo:
 
-> **Link da Aplicação:** **[Detector de Plágio](https://nicolas-ks24.github.io/Simalaridade_de_Jaccard/)**
+> **Link da Aplicação:** **[Detector de Plágio](https://nicolas-ks24.github.io/Similaridade_de_Jaccard/)**
 
 ---
 
